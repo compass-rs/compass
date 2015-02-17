@@ -1,0 +1,12 @@
+[package]
+
+name = "compass"
+version = "0.0.1"
+authors = ["Marius Seritan <github@seritan.net>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/compass-rs/compass.git"
+homepage = "https://github.com/compass-rs/compass"
+
+[dependencies]
+sass-rs = "0.0.4"
