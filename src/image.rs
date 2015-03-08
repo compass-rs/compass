@@ -1,3 +1,5 @@
+/// Provide image processing to compass-rs.
+
 use sass_rs::sass_value::*;
 use image_lib;
 use image_lib::GenericImage;

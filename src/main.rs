@@ -1,5 +1,19 @@
 #![feature(collections,old_path)]
 
+//! This project provides an implementation of compass in rust.
+//!
+//! It relies on the sass-rs [crate](https://crates.io/crates/sass-rs)
+//! / [code](https://github.com/compass-rs/sass-rs)
+//! / [docs](http://compass-rs.github.io/compass/sass-rs/index.html)
+//! which in turns use sass-sys [crate](https://crates.io/crates/sass-sys)
+//! / [code](https://github.com/compass-rs/sass-sys)
+//! / [docs](http://compass-rs.github.io/compass/sass-sys/index.html)
+//! to wrap libsass [github](https://github.com/sass/libsass).
+//!
+//! For image processing we use the image
+//! [code](https://github.com/PistonDevelopers/image) library which
+//! is part of Piston.
+
 extern crate "image" as image_lib;
 extern crate "sass-rs" as sass_rs;
 use sass_rs::sass_context::SassFileContext;
