@@ -1,4 +1,4 @@
-#![feature(env,collections,old_path)]
+#![feature(collections,old_path)]
 
 extern crate "image" as image_lib;
 extern crate "sass-rs" as sass_rs;

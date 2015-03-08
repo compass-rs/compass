@@ -9,7 +9,7 @@ repository = "https://github.com/compass-rs/compass.git"
 homepage = "https://github.com/compass-rs/compass"
 
 [dependencies]
-sass-rs = "0.0.6"
+sass-rs = "0.0.7"
 
 [dependencies.image]
 git = "https://github.com/PistonDevelopers/image"
