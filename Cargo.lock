@@ -3,7 +3,7 @@ name = "compass"
 version = "0.0.1"
 dependencies = [
  "image 0.2.0-alpha.11 (git+https://github.com/PistonDevelopers/image)",
- "sass-rs 0.0.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "sass-rs 0.0.8 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -54,7 +54,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "sass-rs"
-version = "0.0.7"
+version = "0.0.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "sass-sys 0.0.7 (registry+https://github.com/rust-lang/crates.io-index)",

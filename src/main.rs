@@ -1,4 +1,4 @@
-#![feature(collections,old_path)]
+#![feature(old_path)]
 
 //! This project provides an implementation of compass in rust.
 //!
@@ -17,17 +17,14 @@
 extern crate "image" as image_lib;
 extern crate "sass-rs" as sass_rs;
 use sass_rs::sass_context::SassFileContext;
-use sass_rs::sass_function::*;
 mod image;
+mod fn_args;
 
 
 fn compile(filename:&str) {
     let mut file_context = SassFileContext::new(filename);
-    let fns = vec![
-        SassFunctionCallback::from_sig_fn(String::from_str("image-width($img)"),image::image_width),
-        SassFunctionCallback::from_sig_fn(String::from_str("image-height($img)"),image::image_height)
-    ];
-    file_context.sass_context.sass_options.set_sass_functions(fns);
+    let image_fns = image::registry();
+    file_context.sass_context.sass_options.set_sass_functions(image_fns);
     let out = file_context.compile();
     match out {
         Ok(css) => println!("------- css  ------\n{}\n--------", css),

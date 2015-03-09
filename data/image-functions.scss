@@ -2,5 +2,6 @@
 body {
   width: image-width("data/logo1.png");
   height: image-height("data/logo1.png");
+  data: inline-image("data/logo1.png");
 
 }
