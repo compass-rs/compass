@@ -16,6 +16,7 @@
 
 extern crate "image" as image_lib;
 extern crate "sass-rs" as sass_rs;
+extern crate "rustc-serialize" as serialize;
 use sass_rs::sass_context::SassFileContext;
 mod image;
 mod fn_args;

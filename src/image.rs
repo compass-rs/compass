@@ -5,6 +5,9 @@ use sass_rs::sass_function::SassFunction;
 use image_lib;
 use image_lib::GenericImage;
 use fn_args;
+use serialize::base64::{ToBase64, STANDARD};
+use std::io::prelude::Read;
+use std::fs::File;
 
 
 /// Assume the SassValue is a list with a path and opens the given image.
@@ -55,8 +58,25 @@ fn image_height(input:& SassValue) -> SassValue  {
 /// Return a representation that can be used inline in css.
 fn inline_image(input:& SassValue) -> SassValue {
     fn_args::sass_file(input).map(|path| {
-        SassValue::sass_string(&format!("should inline {}",path.display()))
-    }).unwrap_or(SassValue::sass_error("Cannot open file"))
+        match File::open(&path) {
+            Err(_) => SassValue::sass_error("Cannot open file"),
+            Ok(mut file) => {
+                let mut buf:Vec<u8> = Vec::new();
+                match file.read_to_end(&mut buf) {
+                    Err(_) => SassValue::sass_error("Cannot read file"),
+                    Ok(_) => {
+                        let content64 = buf.to_base64(STANDARD);
+                        let encoded = format!("url('data:image/{};base64,{}')",
+                            path.extension_str().unwrap_or("png"),
+                            content64);
+                        SassValue::sass_string(&encoded)
+
+                    }
+                }
+            }
+        }
+
+    }).unwrap_or(SassValue::sass_error("Wrong argument"))
 }
 
 
@@ -64,6 +84,6 @@ pub fn registry() -> Vec<(&'static str,SassFunction)> {
     vec![
         ("inline-image($img,$mime_type:'')", inline_image),
         ("image-width($img)", image_width),
-        ("image-height($img)", image_height),
+        ("image-height($img)", image_height)
     ]
 }
