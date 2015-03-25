@@ -1,4 +1,5 @@
 use sass_rs::sass_value::*;
+use std::old_path::Path;
 
 
 /// Assume the SassValue is a list of one argument which is a path.

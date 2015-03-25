@@ -8,6 +8,8 @@ use fn_args;
 use serialize::base64::{ToBase64, STANDARD};
 use std::io::prelude::Read;
 use std::fs::File;
+use std::old_path::Path;
+use std::old_path::GenericPath;
 
 
 /// Assume the SassValue is a list with a path and opens the given image.

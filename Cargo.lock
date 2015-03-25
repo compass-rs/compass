@@ -2,17 +2,17 @@
 name = "compass"
 version = "0.0.1"
 dependencies = [
- "image 0.2.3 (git+https://github.com/PistonDevelopers/image)",
+ "image 0.2.4 (git+https://github.com/PistonDevelopers/image)",
  "rustc-serialize 0.3.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "sass-rs 0.0.8 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "image"
-version = "0.2.3"
-source = "git+https://github.com/PistonDevelopers/image#53a301c881d965378c7a0419b01644731eb3f69e"
+version = "0.2.4"
+source = "git+https://github.com/PistonDevelopers/image#8538368ebf8bdec5a5e1d9e772df217ac96a1cb8"
 dependencies = [
- "num 0.1.16 (registry+https://github.com/rust-lang/crates.io-index)",
+ "num 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -30,7 +30,7 @@ dependencies = [
 
 [[package]]
 name = "num"
-version = "0.1.16"
+version = "0.1.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "rand 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",

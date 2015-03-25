@@ -14,6 +14,9 @@
 //! [code](https://github.com/PistonDevelopers/image) library which
 //! is part of Piston.
 
+
+#![feature(old_path, old_io)]
+
 extern crate "image" as image_lib;
 extern crate "sass-rs" as sass_rs;
 extern crate "rustc-serialize" as serialize;
