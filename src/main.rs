@@ -1,5 +1,3 @@
-#![feature(old_path)]
-
 //! This project provides an implementation of compass in rust.
 //!
 //! It relies on the sass-rs [crate](https://crates.io/crates/sass-rs)
@@ -15,11 +13,9 @@
 //! is part of Piston.
 
 
-#![feature(old_path, old_io)]
-
-extern crate "image" as image_lib;
-extern crate "sass-rs" as sass_rs;
-extern crate "rustc-serialize" as serialize;
+extern crate image as image_lib;
+extern crate sass_rs;
+extern crate rustc_serialize as serialize;
 use sass_rs::sass_context::SassFileContext;
 mod image;
 mod fn_args;

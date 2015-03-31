@@ -8,8 +8,6 @@ use fn_args;
 use serialize::base64::{ToBase64, STANDARD};
 use std::io::prelude::Read;
 use std::fs::File;
-use std::old_path::Path;
-use std::old_path::GenericPath;
 
 
 /// Assume the SassValue is a list with a path and opens the given image.
@@ -17,7 +15,7 @@ use std::old_path::GenericPath;
 fn image_dimensions(input:& SassValue) -> Result<(u32,u32),&str>  {
     match fn_args::sass_file(input) {
         Ok(path) => {
-            match image_lib::open(&Path::new(path)) {
+            match image_lib::open(path) {
                 Ok(img) => {
                     Ok(img.dimensions())
                 }
@@ -68,8 +66,12 @@ fn inline_image(input:& SassValue) -> SassValue {
                     Err(_) => SassValue::sass_error("Cannot read file"),
                     Ok(_) => {
                         let content64 = buf.to_base64(STANDARD);
+                        let ext = match path.extension() {
+                            Some(os_str) => os_str.to_str().unwrap_or("png"),
+                            None => "png"
+                        };
                         let encoded = format!("url('data:image/{};base64,{}')",
-                            path.extension_str().unwrap_or("png"),
+                            ext,
                             content64);
                         SassValue::sass_string(&encoded)
 
