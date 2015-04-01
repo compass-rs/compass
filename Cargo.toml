@@ -9,7 +9,7 @@ repository = "https://github.com/compass-rs/compass.git"
 homepage = "https://github.com/compass-rs/compass"
 
 [dependencies]
-sass-rs = "0.0.9"
+sass-rs = "0.0.10"
 rustc-serialize = "0.3"
 
 [dependencies.image]

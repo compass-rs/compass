@@ -29,7 +29,6 @@ fn image_dimensions(input:& SassValue) -> Result<(u32,u32),&str>  {
 
 /// Get the image width for the file being passed in.
 pub fn image_width(input:& SassValue) -> SassValue  {
-    println!("Entering image_width");
     match image_dimensions(input) {
         Ok(img) => {
             let out = format!("{}", img.0);
@@ -43,7 +42,6 @@ pub fn image_width(input:& SassValue) -> SassValue  {
 
 /// Get the image width for the file being passed in.
 fn image_height(input:& SassValue) -> SassValue  {
-    println!("Entering image_height");
     match image_dimensions(input) {
         Ok(img) => {
             let out = format!("{}", img.1);
