@@ -12,18 +12,10 @@ Documentation: http://compass-rs.github.io/compass/
 Status
 ------
 
+Some of the image functions are implemented. See https://github.com/compass-rs/compass/data/image-functions.scss
 
-The image-width and image-height functions are implemented, however only one of them is expanded. See example below.
+You can run the above file with the following command.
 
 ```
 cargo run data/image-functions.scss
-     Running `target/compass data/image-functions.scss`
-Compiling sass file: `data/image-functions.scss`.
-Entering image_height
-------- css  ------
-body {
-  width: image-width("data/logo1.png");
-  height: 64; }
-
---------
 ```
