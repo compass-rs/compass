@@ -15,16 +15,26 @@
 
 extern crate image as image_lib;
 extern crate sass_rs;
+extern crate sprite;
 extern crate rustc_serialize as serialize;
 use sass_rs::sass_context::SassFileContext;
 mod image;
+mod sprite_fn;
 mod fn_args;
 
+fn combine<T>(one:&mut Vec<T>, two:Vec<T>) {
+    one.reserve(two.len());
+    for element in two {
+        one.push(element)
+    }
+}
 
 fn compile(filename:&str) {
     let mut file_context = SassFileContext::new(filename);
-    let image_fns = image::registry();
-    file_context.sass_context.sass_options.set_sass_functions(image_fns);
+    let mut all_fns = Vec::new();
+    combine( &mut all_fns, sprite_fn::registry());
+    combine( &mut all_fns, image::registry());
+    file_context.sass_context.sass_options.set_sass_functions(all_fns);
     let out = file_context.compile();
     match out {
         Ok(css) => println!("------- css  ------\n{}\n--------", css),

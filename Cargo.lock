@@ -2,15 +2,24 @@
 name = "compass"
 version = "0.0.1"
 dependencies = [
- "image 0.3.7 (git+https://github.com/PistonDevelopers/image)",
+ "compass-sprite 0.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "image 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
  "rustc-serialize 0.3.12 (registry+https://github.com/rust-lang/crates.io-index)",
  "sass-rs 0.0.11 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "byteorder"
-version = "0.3.5"
+version = "0.3.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "compass-sprite"
+version = "0.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "image 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
 [[package]]
 name = "enum_primitive"
@@ -23,9 +32,9 @@ dependencies = [
 [[package]]
 name = "image"
 version = "0.3.7"
-source = "git+https://github.com/PistonDevelopers/image#4262e7224fbbf555c7814fe6f7d2e275e34e290b"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
- "byteorder 0.3.5 (registry+https://github.com/rust-lang/crates.io-index)",
+ "byteorder 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
  "enum_primitive 0.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "num 0.1.22 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
