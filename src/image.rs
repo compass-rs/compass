@@ -82,10 +82,34 @@ fn inline_image(input:& SassValue) -> SassValue {
 }
 
 
-pub fn registry() -> Vec<(&'static str,SassFunction)> {
+pub fn registry() -> Vec<(&'static str,Box<SassFunction>)> {
     vec![
-        ("inline-image($img,$mime_type:'')", inline_image),
-        ("image-width($img)", image_width),
-        ("image-height($img)", image_height)
+        ("inline-image($img,$mime_type:'')", Box::new(InlineImageFn)),
+        ("image-width($img)", Box::new(ImageWidthFn)),
+        ("image-height($img)", Box::new(ImageHeightFn))
     ]
+}
+
+struct InlineImageFn;
+
+impl SassFunction for InlineImageFn {
+    fn custom(&self, input: &SassValue)->SassValue {
+        inline_image(input)
+    }
+}
+
+struct ImageWidthFn;
+
+impl SassFunction for ImageWidthFn {
+    fn custom(&self, input: &SassValue)->SassValue {
+        image_width(input)
+    }
+}
+
+struct ImageHeightFn;
+
+impl SassFunction for ImageHeightFn {
+    fn custom(&self, input: &SassValue)->SassValue {
+        image_height(input)
+    }
 }

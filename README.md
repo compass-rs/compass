@@ -19,3 +19,4 @@ You can run the above file with the following command.
 ```
 cargo run data/image-functions.scss
 ```
+
