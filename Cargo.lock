@@ -5,7 +5,7 @@ dependencies = [
  "compass-sprite 0.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "image 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)",
  "rustc-serialize 0.3.13 (registry+https://github.com/rust-lang/crates.io-index)",
- "sass-rs 0.0.12 (registry+https://github.com/rust-lang/crates.io-index)",
+ "sass-rs 0.0.13 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -73,7 +73,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "sass-rs"
-version = "0.0.12"
+version = "0.0.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "libc 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
