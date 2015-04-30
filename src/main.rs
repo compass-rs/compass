@@ -13,18 +13,17 @@
 //! is part of Piston.
 
 
+use std::sync::{RwLock,Arc};
+use std::thread;
 extern crate image as image_lib;
 extern crate sass_rs;
 extern crate sprite;
 extern crate rustc_serialize as serialize;
-use sass_rs::sass_context::SassFileContext;
+use sass_rs::sass_context::{SassFileContext,SassOptions};
 use sass_rs::dispatcher::Dispatcher;
-use std::thread;
-use function_registry::FunctionRegistry;
 
 
 mod image;
-mod function_registry;
 mod sprite_generator;
 mod fn_args;
 
@@ -39,41 +38,36 @@ fn combine<T>(one:&mut Vec<T>, two:Vec<T>) {
 
 /// Ownd the compilation environment to simplify lifetime management.
 struct Env {
-    generator: SpriteGenerator,
-    dispatcher: Dispatcher,
-    file_context: SassFileContext
+    dispatcher: Dispatcher
 }
 
 impl Env {
-    pub fn build(filename:&str,base_url:&str) -> Env {
-        let generator = SpriteGenerator::build(base_url);
-        let mut file_context = SassFileContext::new(filename);
+    pub fn build(base_url:&str, options:Arc<RwLock<SassOptions>>) -> Env {
+        let generator = Arc::new(SpriteGenerator::build(base_url));
         let mut all_fns = Vec::new();
-        let sg = SpriteGenerator::registry(&generator);
-        combine( &mut all_fns, sg);
+        {
+            let sg = SpriteGenerator::registry(generator.clone());
+            combine( &mut all_fns, sg);
+        }
         combine( &mut all_fns, image::registry());
-        let options = file_context.sass_context.sass_options.clone();
         let dispatcher = Dispatcher::build(all_fns,options);
         Env {
-            generator: generator,
-            dispatcher: dispatcher,
-            file_context: file_context
+            dispatcher: dispatcher
         }
 
     }
 
-    pub fn compile(&mut self) -> Result<String,String> {
-        self.file_context.compile()
-    }
 }
 
 fn compile(filename:&str) {
-    let mut env = Env::build(filename, "/images");
-    let dispatcher = &env.dispatcher;
+    let mut file_context = SassFileContext::new(filename);
+    let options = file_context.sass_context.sass_options.clone();
+
     thread::spawn(move|| {
-        while dispatcher.dispatch().is_ok() {}
+        let env = Env::build("/images", options);
+        while env.dispatcher.dispatch().is_ok() {}
     });
-    let out = env.compile();
+    let out = file_context.compile();
     match out {
         Ok(css) => println!("------- css  ------\n{}\n--------", css),
         Err(err) => println!("{}", err)

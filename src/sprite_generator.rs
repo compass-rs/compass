@@ -1,13 +1,11 @@
 use std::path::Path;
-use std::rc::Rc;
+use std::sync::Arc;
 use std::collections::HashMap;
 use sass_rs::sass_value::*;
 use sass_rs::sass_function::SassFunction;
 use sprite::*;
 use fn_args;
-use std::cell::RefCell;
 use std::sync::Mutex;
-use function_registry::FunctionRegistry;
 
 
 /// Sprite Generator keeps track of the generated SpriteMaps
@@ -105,11 +103,11 @@ impl SpriteGenerator {
         }
     }
 
-    pub fn registry<'a>(generator:&'a SpriteGenerator) -> Vec<(&'static str,Box<SassFunction + 'a>)> {
+    pub fn registry(generator:Arc<SpriteGenerator>) -> Vec<(&'static str,Box<SassFunction>)> {
 
         vec![
-            ("sprite-map($img)", Box::new(SpriteMapFn{generator: generator})),
-            ("sprite($map,$name)", Box::new(SpriteBackgroundFn{generator: generator}))
+            ("sprite-map($img)", Box::new(SpriteMapFn{generator: generator.clone()})),
+            ("sprite($map,$name)", Box::new(SpriteBackgroundFn{generator: generator.clone()}))
         ]
     }
 
@@ -117,25 +115,22 @@ impl SpriteGenerator {
 
 
 
-struct SpriteMapFn<'a> {
-    generator: &'a SpriteGenerator
+struct SpriteMapFn {
+    generator: Arc<SpriteGenerator>
 }
 
-unsafe impl<'a> Send for SpriteMapFn<'a> {}
-
-impl<'a> SassFunction for SpriteMapFn<'a> {
+impl SassFunction for SpriteMapFn {
     fn custom(&self, input: &SassValue)->SassValue {
         self.generator.sprite_map(input)
     }
 }
 
-struct SpriteBackgroundFn<'a> {
-    generator: &'a SpriteGenerator
+struct SpriteBackgroundFn {
+    generator: Arc<SpriteGenerator>
 }
 
-unsafe impl<'a> Send for SpriteBackgroundFn<'a> {}
 
-impl<'a> SassFunction for SpriteBackgroundFn<'a> {
+impl SassFunction for SpriteBackgroundFn {
     fn custom(&self, input: &SassValue)->SassValue {
         self.generator.sprite_background(input)
     }
