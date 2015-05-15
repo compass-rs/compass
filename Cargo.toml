@@ -16,4 +16,4 @@ rustc-serialize = "0.3"
 
 [dependencies.image]
 # git = "https://github.com/PistonDevelopers/image"
-version = "0.3.7"
+version = "0.3"
