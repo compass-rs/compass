@@ -10,7 +10,7 @@ homepage = "https://github.com/compass-rs/compass"
 description = "Command line `compass` executable - work in progress"
 
 [dependencies]
-sass-rs = "0.0.16"
+sass-rs = "0.0.17"
 compass-sprite = "0.0.3"
 rustc-serialize = "0.3"
 
