@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["SpriteMap","The sprite map holding all the images for a given invocation."],["SpriteRegion","Information about one of the embedded images."]]});
